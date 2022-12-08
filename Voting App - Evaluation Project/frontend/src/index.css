@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Style+Script&display=swap');
+
+* {
+  font-family: 'Quicksand', sans-serif;
+}
+
+#hero-first {
+  background-image: linear-gradient(#d0cccb, #e1e1df, #f0efed, #f3f2f0) ;
+  /* e1e1df f0efed d0cccb*/
+}
+
+#second-about-bubble{
+  background-image: linear-gradient(#7e22ce, #d0cccb) ;
+}
+
+#first-about-bubble{
+  background-image: linear-gradient(#d0cccb, #7e22ce) ;
+}
+
+#admin-button {
+  background-color: #f3f2f0;
+}
+
+#admin-button:hover{
+  background-color: #7e22ce;
+}
+
+img {
+  border-style: none;
+}
+
+#ongoing-election{
+  background-color: #e7e7e7;
+}
+
+/* #second-hero{
+  margin-top: -100px;
+} */
