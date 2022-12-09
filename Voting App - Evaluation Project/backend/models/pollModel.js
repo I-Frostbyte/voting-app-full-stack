@@ -18,6 +18,9 @@ const candidateSchema = new Schema({
     campaignPromise: {
         type: String        
     },
+    candidateVotes: {
+        type: Number
+    }
     
 },{timestamps: true})
 

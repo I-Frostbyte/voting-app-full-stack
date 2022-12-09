@@ -2,10 +2,12 @@ import React from 'react'
 import About3 from '../assets/About3.jpg'
 import { HiLightBulb} from 'react-icons/hi'
 import { GiVote } from 'react-icons/gi'
+import Navbar from '../components/Navbar'
 
 const About = () => {
   return (
     <div className='container'>
+        <Navbar />
         <div className="pt-2">
           <h1 className="text-5xl text-center p-2 text-purple-700 font-bold my-3 px-64">We aim to make elections easy, seamless and fair</h1>
           <p className="text-center px-32 my-3 text-slate-500 font-semibold">This voting system was made to improve the voting system of Academic and Prolitical enterprises. Electing representatives has been made easy on this App. With just a few clicks, voters are able to cast their ballots in any preferred election.</p>

@@ -32,7 +32,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 ml-8 pb-20 pt-40">
+          <div className="md:grid md:grid-cols-2 grid grid-cols-1 gap-4 md:px-0 ml-8 pb-20 md:pt-40 pt-10">
             <div className="w-full shadow-2xl p-5 mr-5" id="ongoing-election">
               <h1 className="text-2xl font-semibold pb-1">Activity</h1>
                             
@@ -75,7 +75,7 @@ const AdminDashboard = () => {
               </div>
 
             </div> 
-            <div className="w-3/4 ml-5 shadow-2xl p-3" id="ongoing-election">
+            <div className="md:w-3/4 md:ml-5 shadow-2xl p-3 md:pb-0 pb-64" id="ongoing-election">
               <h1 className="text-2xl font-semibold pb-3">Live Results</h1>              
             </div>  
             

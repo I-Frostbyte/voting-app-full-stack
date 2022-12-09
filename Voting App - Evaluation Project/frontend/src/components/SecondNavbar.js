@@ -5,7 +5,7 @@ import {VscBellDot} from 'react-icons/vsc'
 const SecondNavbar = () => {
   return (
     <div className='container flex justify-between border-b border-gray-400 items-center p-3'>
-        <div className="w-1/2 md:w-8/12 xl:w-1/2 h-1/12 px-5 rounded-lg ml-5 bg-white">
+        <div className="w-1/2 md:w-8/12 xl:w-1/2 h-1/12 px-5 rounded-lg ml-5 bg-white invisible sm:visible">
             <section className="w-full h-10 flex items-center">
                 <span className="w-10 h-full hidden md:flex items-center">
                     <button>

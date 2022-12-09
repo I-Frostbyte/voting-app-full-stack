@@ -12,10 +12,12 @@ const CandidatesModal = ({ showCandidateModal, setShowCandidateModal }) => {
     const [profilePicture, setProfilePicture] = useState(null)
     const [error, setError] = useState(null)
 
+    const candidateVotes = 0;
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const candidate = { name, department, age, campaignPromise }
+        const candidate = { name, department, age, campaignPromise, candidateVotes }
 
         
         const response = await fetch('/api/candidates', {

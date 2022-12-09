@@ -3,7 +3,7 @@ import { GiVote } from 'react-icons/gi'
 
 const Footer = () => {
   return (
-    <div className='flex bg-slate-700 text-white text-sm py-10 justify-between px-10'>
+    <div className='md:flex sm:grid sm:grid-cols-2 grid grid-cols-1 gap-5 bg-slate-700 text-white text-sm py-10 justify-between px-10'>
         <div className="block pr-20">
             <a href="#" className='text-xl font-bold text-white flex'><GiVote size={30} className='mr-2' />Voteroo</a>
             <p className='text-sm pt-2 pb-4'>&copy; Copyright 2021 - Allpha Team Technologies</p>

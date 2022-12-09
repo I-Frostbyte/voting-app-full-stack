@@ -24,9 +24,9 @@ const Signup = () => {
   return (
     <div className="container pt-5">
       <Navbar />
-      <div className="grid grid-cols-2">
-        <div className="mx-2 pt-2">
-          <img src={Login1} alt="" className="ml-20" />
+      <div className="md:grid md:grid-cols-2 grid grid-cols-1">
+        <div className="md:mx-2 mx-20 pt-2">
+          <img src={Login1} alt="" className="md:ml-20 ml-10" />
         </div>
         <div className="mr-0 ml-20 text-black">
           <div className="py-3">

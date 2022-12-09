@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <div className='container pt-5'>
         <Navbar />
-        <div className="grid grid-cols-2">
+        <div className="md:grid md:grid-cols-2 grid grid-cols-1">
             <div className="mx-2 pt-2">
                 <img src={Welcome1} alt="" className='h-5/6 ml-20'/>
             </div>
@@ -22,7 +22,7 @@ const Login = () => {
                     <input type="password" className='rounded-3xl pr-72 pl-5 py-3' placeholder='Password'/>
                 </div>
                 <div className="text-center pb-10">
-                    <button className="text-white bg-purple-500 hover:bg-white hover:border hover:border-purple-500 hover:text-purple-500 rounded-3xl px-56 py-4 my-3 font-bold text-xs">Login</button>
+                    <button className="text-white bg-purple-500 hover:bg-white hover:border hover:border-purple-500 hover:text-purple-500 rounded-3xl px-20 py-4 my-3 font-bold text-xs">Login</button>
                 </div>
             </div>
         </div>

@@ -13,6 +13,12 @@ const VotingPage = () => {
   //         isClicked = disable
   //         console.log(isClicked);
   //     }
+  // const [candidateVote, setCandidateVote] = useState('0')
+
+  // failed function to update candidateVote State above
+  // const chooseVote = (voted) => {
+  //   setCandidateVote(voted);
+  // }
 
   const { candidates, dispatch } = useCandidatesContext();
 
@@ -30,7 +36,7 @@ const VotingPage = () => {
     };
 
     fetchCandidates();
-  });
+  }, []);
 
   return (
     <div className="container flex">
@@ -54,7 +60,7 @@ const VotingPage = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-4 gap-4 p-4 items-center">
+            <div className="md:grid md:grid-cols-4 grid grid-cols-2 gap-4 p-4 items-center">
               {candidates &&
                 candidates.map((candidate, ind) => {
                   return (
@@ -64,6 +70,7 @@ const VotingPage = () => {
                       name={candidate.name}
                       department={candidate.department}
                       numberOfVotes={candidate.numberOfVotes}
+                      id={candidate._id}                      
                     />
                   );
                 })}
@@ -78,7 +85,7 @@ const VotingPage = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-4 gap-4 p-4 items-center">
+            <div className="md:grid md:grid-cols-4 grid grid-cols-2 gap-4 p-4 items-center">
               {VotingCardData[1].map((val, ind) => {
                 return (
                   <VotingCard

@@ -13,13 +13,13 @@ const VoterDashboard = () => {
             <h1 className='text-purple-700 text-3xl font-bold'>Hello, Jane</h1>
             <p className="text-slate-500 font-semibold pb-3">Welcome to the Voteroo voting platform</p>
           </div>
-          <div className="grid grid-cols-2 ml-8 pb-20">
-            <div className="w-full shadow-2xl p-5 mr-5 mb-10" id="ongoing-election">
+          <div className="md:grid md:grid-cols-2 grid grid-cols-1 gap-4 ml-8 pb-20">
+            <div className="w-full shadow-2xl p-5 mr-5 md:mb-10" id="ongoing-election">
               <h1 className="text-2xl font-semibold pb-1">Ongoing Election</h1>
               <p className="text-slate-500 font-semibold pb-3">President Student Council</p>
               <img src={OngoingElection} alt="" />
             </div> 
-            <div className="w-3/4 ml-5 shadow-2xl p-3 mb-10" id="ongoing-election">
+            <div className="md:w-3/4 md:ml-5 shadow-2xl p-3 md:pb-0 pb-72 md:mb-10" id="ongoing-election">
               <h1 className="text-2xl font-semibold pb-3">Calendar</h1>              
             </div> 
 
@@ -65,7 +65,7 @@ const VoterDashboard = () => {
               </div>
 
             </div> 
-            <div className="w-3/4 ml-5 shadow-2xl p-3" id="ongoing-election">
+            <div className="md:w-3/4 md:ml-5 shadow-2xl p-3 md:pb-0 pb-72" id="ongoing-election">
               <h1 className="text-2xl font-semibold pb-3">Live Results</h1>              
             </div> 
           </div>

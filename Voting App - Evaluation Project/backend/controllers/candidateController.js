@@ -92,7 +92,7 @@ const createPoll = async (req, res) => {
 // create a new candidate
 const createCandidate = async (req, res) => {
     
-    const { name, department, age, campaignPromise } = req.body
+    const { name, department, age, campaignPromise, candidateVotes } = req.body
 
     
     let emptyFields = []
@@ -114,7 +114,7 @@ const createCandidate = async (req, res) => {
     // add candidate to db
     try{
         const user_id = req.user_id
-        const candidate = await Candidate.create({name, department, age, campaignPromise, user_id})
+        const candidate = await Candidate.create({name, department, age, campaignPromise, candidateVotes, user_id})
         return res.status(200).json(candidate)
     } catch(error) {
         return res.status(400).json({error: error.message})
@@ -164,6 +164,7 @@ const deleteCandidate = async (req, res) => {
 
 // update a candidate
 const updateCandidate = async (req, res) => {
+        
     const { id } = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)){
@@ -179,6 +180,25 @@ const updateCandidate = async (req, res) => {
     }
 
     res.status(200).json(candidate)
+    
+   /* Tried Net Ninja Old Method
+
+   const updates = req.body
+
+    if(ObjectId.isValid(req.params.id)){
+        db.collection('candidates')
+            .updateOne({_id: ObjectId(req.params.id)}, {$set: updates})
+            .then(result => {
+                res.status(200).json(result)
+            })
+            .catch(err => {
+                res.status(500).json({error: 'Could not update the candidate'})
+            })
+    } else {
+        res.status(500).json({error: "Not a valid candidate id"})
+    }
+
+   */
 }
 
 // update a poll

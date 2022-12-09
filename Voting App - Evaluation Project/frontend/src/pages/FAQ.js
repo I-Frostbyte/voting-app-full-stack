@@ -1,10 +1,12 @@
 import React from 'react'
 import FAQ3 from '../assets/FAQ3.jpg'
 import { TbNumber1, TbNumber2, TbNumber3, TbNumber4 } from 'react-icons/tb'
+import Navbar from '../components/Navbar'
 
 const FAQ = () => {
   return (
     <div className='container'>
+      <Navbar />
         <div className="pt-2">
             <h1 className="text-5xl text-center p-2 text-purple-700 font-bold my-3 px-64">Frequently Asked Questions</h1>
         </div>
