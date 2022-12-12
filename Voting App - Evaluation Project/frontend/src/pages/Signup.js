@@ -1,29 +1,38 @@
 import React from "react";
+// import { useState, useEffect } from "react";
 import Login1 from "../assets/Login1.jpg";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import LoginButton from "../components/Login";
-import { useEffect } from "react";
+// import LoginButton from "../components/Login";
+// import LogoutButton from '../components/Logout'
+import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 
-const clientId =
-  "975614919993-ht8pilt54vaht18rpkr4bvdsjuoj18kg.apps.googleusercontent.com";
+const Signup = (props) => {
 
-const Signup = () => {
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    }
+  const clientId =
+    "975614919993-ht8pilt54vaht18rpkr4bvdsjuoj18kg.apps.googleusercontent.com";
+  
+  const loginSuccess = () => {
+    props.onLoginSuccess()
+  }
 
-    gapi.load("client:auth2", start);
-  });
+  const loginFailure = () => {
+    props.onLoginFailure()
+  }
+
+  const startLogout = () => {
+    props.onLogout()
+  }
+
+  const userProfile = props.profile
 
   return (
     <div className="container pt-5">
-      <Navbar />
+      <Navbar 
+      profile={userProfile}
+      onLogout={startLogout}
+      />
       <div className="md:grid md:grid-cols-2 grid grid-cols-1">
         <div className="md:mx-2 mx-20 pt-2">
           <img src={Login1} alt="" className="md:ml-20 ml-10" />
@@ -73,7 +82,16 @@ const Signup = () => {
           <div className="text-center pb-10">
             <h1 className="pb-5 text-xl font-bold hover:text-purple-500">OR</h1>
             <div className="right-0">
-              <LoginButton />
+              <div id="signInButton">
+                <GoogleLogin
+                  clientId={clientId}
+                  buttonText="SIGN IN WITH GOOGLE"
+                  onSuccess={loginSuccess}
+                  onFailure={loginFailure}
+                  cookiePolicy={"single_host_origin"}
+                  isSignedIn={true}
+                />
+              </div>
             </div>
           </div>
         </div>

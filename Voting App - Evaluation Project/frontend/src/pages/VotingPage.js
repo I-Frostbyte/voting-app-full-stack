@@ -6,8 +6,9 @@ import VotingCardData from "../components/VotingCardData";
 import { useState } from "react";
 import CandidateDetails from "../components/CandidateDetails";
 import { useCandidatesContext } from "../hooks/useCandidatesContext";
+import PollingCard from "../components/PollingCard";
 
-const VotingPage = () => {
+const VotingPage = (props) => {
   // let isClicked = false;
   //     const handleClick = (disable, disabled) => {
   //         isClicked = disable
@@ -19,24 +20,7 @@ const VotingPage = () => {
   // const chooseVote = (voted) => {
   //   setCandidateVote(voted);
   // }
-
-  const { candidates, dispatch } = useCandidatesContext();
-
-  useEffect(() => {
-    
-
-    <CandidateDetails />;
-    const fetchCandidates = async () => {
-      const response = await fetch("/api/candidates");
-      const json = await response.json();
-
-      if (response.ok) {
-        dispatch({ type: "SET_CANDIDATES", payload: json });
-      }
-    };
-
-    fetchCandidates();
-  }, []);
+   
 
   return (
     <div className="container flex">
@@ -48,11 +32,21 @@ const VotingPage = () => {
             Your Vote is Secure, Your Vote Counts
           </h1>
           <p className="text-slate-500 font-bold pb-3">
-            You can only vote for one candidate.{" "}
+            You can only vote for one candidate. You can only vote when signed
+            in.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-4 ml-8 pb-20">
-          <div id="ongoing-election" className="p-4">
+        <div className="grid grid-cols-1 gap-4">
+          {props.polls &&
+            props.polls.map((poll, ind) => {
+              return (
+                <div className="w-11/12 ml-8">
+                  <PollingCard key={ind} title={poll.title} />
+                </div>
+              );
+            })}
+
+          <div id="ongoing-election" className="p-4 ml-8 pb-20 mr-3">
             <div className="flex items-center">
               <div className="bg-purple-400 rounded-3xl p-2"></div>
               <p className="text-slate-500 font-semibold px-2">
@@ -60,21 +54,7 @@ const VotingPage = () => {
               </p>
             </div>
 
-            <div className="md:grid md:grid-cols-4 grid grid-cols-2 gap-4 p-4 items-center">
-              {candidates &&
-                candidates.map((candidate, ind) => {
-                  return (
-                    <VotingCard
-                      key={ind}
-                      profilepic={candidate.profilepic}
-                      name={candidate.name}
-                      department={candidate.department}
-                      numberOfVotes={candidate.numberOfVotes}
-                      id={candidate._id}                      
-                    />
-                  );
-                })}
-            </div>
+            
           </div>
 
           <div id="ongoing-election" className="p-4">

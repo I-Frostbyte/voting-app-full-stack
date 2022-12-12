@@ -7,10 +7,24 @@ import { FaLock, FaVoteYea } from 'react-icons/fa'
 import { MdTimeline } from 'react-icons/md'
 import { TbNumber1, TbNumber2, TbNumber3} from 'react-icons/tb'
 import Navbar from '../components/Navbar'
+import { gapi } from 'gapi-script'
 // import { config } from 'dotenv'
 
 
 const Hero = () => {
+    useEffect(() => {
+        const initClient = () => {
+          gapi.client.init({
+            clientId: clientId,
+            scope: "",
+          });
+        };
+    
+        gapi.load("client:auth2", initClient);
+      });
+    
+      const clientId =
+      "975614919993-ht8pilt54vaht18rpkr4bvdsjuoj18kg.apps.googleusercontent.com";
 
   return (
     

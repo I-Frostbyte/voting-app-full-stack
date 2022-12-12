@@ -1,36 +1,15 @@
 const mongoose = require('mongoose')
+// const candidateSchema = require('./candidateModel')
 
 const Schema = mongoose.Schema
-
-const candidateSchema = new Schema({
-    name: {
-        type: String
-        // required: true
-    },
-    department: {
-        type: String
-        // required: true
-    },
-    age: {
-        type: String
-        // required: true 
-    },
-    campaignPromise: {
-        type: String        
-    },
-    candidateVotes: {
-        type: Number
-    }
-    
-},{timestamps: true})
 
 const pollSchema = new Schema({
     title: {
         type: String,
         required: true
-    },
-    candidate: [candidateSchema]
+    }
+    // candidate: [candidateSchema]
 })
 
 module.exports = mongoose.model('Poll', pollSchema)
-module.exports = mongoose.model('Candidate', candidateSchema)
+// module.exports = mongoose.model('Candidate', candidateSchema)

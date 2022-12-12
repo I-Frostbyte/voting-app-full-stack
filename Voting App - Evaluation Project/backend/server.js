@@ -5,7 +5,9 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 var multer = require('multer')
 // voting routes require
-const candidateRoutes = require('./routes/candidates') 
+const candidateRoutes = require('./routes/candidates')
+const pollRoutes = require('./routes/polls')
+const pictureRoutes = require('./routes/pictures')
 // user routes require
 
 var fs = require('fs')
@@ -25,6 +27,8 @@ app.use((req, res, next) => {
 
 // routes
 app.use('/api/candidates', candidateRoutes)
+app.use('/api/polls', pollRoutes)
+app.use('/api/pictures', pictureRoutes)
 
 
 // connect to db

@@ -4,13 +4,7 @@ const {
     getCandidates,
     getCandidate,
     deleteCandidate,
-    updateCandidate,
-    createProfilepic,
-    getProfilepic,
-    getPolls,
-    getPoll,
-    createPoll,
-    updatePoll
+    updateCandidate   
 } = require('../controllers/candidateController')
 
 // var profileModel = require('../models/candidateModel')
@@ -29,7 +23,7 @@ router.get('/', getCandidates)
 // GET a single candidate
 router.get('/:id', getCandidate)
 
-// CREATE a new candidate
+// CREATE a new candidate 
 router.post('/', createCandidate)
 
 // DELETE a candidate
@@ -37,23 +31,5 @@ router.delete('/:id', deleteCandidate)
 
 // UPDATE a candidate
 router.patch('/:id', updateCandidate)
-
-// GET a single profilepic
-router.get('/pictures/:id', getProfilepic)
-
-// CREATE a new profile pic
-router.post('/pictures', createProfilepic)
-
-// GET all polls
-router.get('/polls', getPolls)
-
-// GET a single poll
-router.get('/polls/:id', getPoll)
-
-// CREATE a new poll
-router.post('/polls', createPoll)
-
-// UPDATE a poll
-router.patch('/polls/:id', updatePoll)
 
 module.exports = router

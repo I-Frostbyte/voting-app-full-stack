@@ -1,7 +1,7 @@
-const Candidate = require('../models/pollModel')
-const Profilepic = require('../models/profilepicModel')
+const Candidate = require('../models/candidateModel')
+
 // const Profilepic = require('../models/pollModel')
-const Poll = require('../models/pollModel')
+
 const mongoose = require('mongoose')
 // const candidateModel = require('../models/candidateModel')
 
@@ -19,12 +19,6 @@ const getCandidates = async (req, res) => {
     
 }
 
-// get all polls
-const getPolls = async (req, res) => {
-    const polls = await Poll.find({}).sort({createdAt: -1})
-
-    res.status(200).json(polls)
-}
 
 // get a single candidate
 
@@ -40,59 +34,14 @@ const getCandidate = async (req, res) => {
     if(!candidate){
         return res.status(404).json({error: "No such candidate"})
     }
+
+    res.status(200).json(candidate)
 }
-
-// get a single poll
-const getPoll = async (req, res) => {
-    const { id } = req.params
-
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: "No such poll"})
-    }
-
-    const poll = await Poll.findById(id)
-
-    if(!poll){
-        return res.status(404).json({error: "No such poll"})
-    }
-
-}
-
-// get a single profilepic
-
-const getProfilepic = async (req, res) => {
-    const { id } = req.params 
-
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: "No such candidate"})
-    }
-
-    const profilepic = await Profilepic.findById(id)
-
-    if(!profilepic){
-        return res.status(404).json({error: "No profile picture for this candidate"})
-    }
-}
-
-// create a new poll
-const createPoll = async (req, res) => {
-    const { title } = req.body
-
-    // add poll to db
-    try{
-        const user_id = req.user_id
-        const poll = await Poll.create({title, user_id})
-        return res.status(200).json(poll)
-    } catch(error) {
-        return res.status(400).json({error: error.message})
-    }
-} 
-
 
 // create a new candidate
 const createCandidate = async (req, res) => {
     
-    const { name, department, age, campaignPromise, candidateVotes } = req.body
+    const { name, department, age, campaignPromise, candidateVotes, position } = req.body
 
     
     let emptyFields = []
@@ -114,7 +63,7 @@ const createCandidate = async (req, res) => {
     // add candidate to db
     try{
         const user_id = req.user_id
-        const candidate = await Candidate.create({name, department, age, campaignPromise, candidateVotes, user_id})
+        const candidate = await Candidate.create({name, department, age, campaignPromise, candidateVotes, position, user_id})
         return res.status(200).json(candidate)
     } catch(error) {
         return res.status(400).json({error: error.message})
@@ -123,26 +72,6 @@ const createCandidate = async (req, res) => {
     // res.json({msg: 'Add a new candidate'})
     
     
-}
-
-// create new profile picture
-const createProfilepic = async (req, res) => {
-    var obj = {
-        profilepic: {
-            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-            contentType: 'image/jpg',            
-        }
-    }
-
-    Profilepic.create(obj, (err, item) => {
-        if (err) {
-            console.log(err)
-        }
-        else {
-            item.save();
-            // res.redirect('/')
-        } 
-    } )
 }
 
 // delete a candidate
@@ -172,7 +101,9 @@ const updateCandidate = async (req, res) => {
     }
 
     const candidate = await Candidate.findOneAndUpdate({_id: id}, {
-        ...req.body 
+        $inc: {candidateVotes: 1}  
+    }, {
+        new: true
     })
 
     if(!candidate){
@@ -201,35 +132,10 @@ const updateCandidate = async (req, res) => {
    */
 }
 
-// update a poll
-const updatePoll = async (req, res) => {
-    const { id } = req.params
-
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: "No such poll exists"})
-    }
-
-    const poll = await Poll.findOneAndUpdate({_id: id}, {
-        ...req.body
-    })
-    
-    if(!poll){
-        return res.status(404).json({error: "No such poll exists"})
-    }
-
-    res.status(200).json(poll)
-}
-
 module.exports ={
     getCandidates,
     getCandidate,    
     createCandidate,
     deleteCandidate,
-    updateCandidate,
-    getProfilepic,
-    createProfilepic,
-    getPolls,
-    getPoll,
-    createPoll,
-    updatePoll
+    updateCandidate       
 }

@@ -40,7 +40,7 @@ const PollingPage = () => {
     };
 
     const fetchPolls = async () => {
-      const response = await fetch("/api/candidates/polls");
+      const response = await fetch("/api/polls");
       const json = await response.json();
 
       if (response.ok) {

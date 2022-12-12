@@ -1,77 +1,93 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { useVotingContext } from '../hooks/useVotingContext'
+import React from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useVotingContext } from "../hooks/useVotingContext";
 
-const VotingCard = (props) => {    
-    const [votes, setVotes] = useState(0)
-    const [error, setError] = useState(null)
+const VotingCard = (props) => {
+  // const [votes, setVotes] = useState(0)
+  const [error, setError] = useState(null);
 
-    // const { disableButton, dispatch } = useVotingContext
+  // const { disableButton, dispatch } = useVotingContext
 
-    const candidateId = props.id
+  const candidateId = props.id;
 
-    const submitVotes = async (e) => {
-        e.preventDefault();
+  const submitVotes = async (e) => {
+    e.preventDefault();
 
-        setVotes(1)
+    // setVotes(1)
 
-        const candidateVotes = {votes}
+    props.onVoted();
 
-        const response = await fetch('/api/candidates' + candidateId, {
-            method: 'PATCH',
-            body: JSON.stringify(candidateVotes),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+    // const candidateVotes = {votes}
 
-        const json = await response.json
+    const response = await fetch("/api/candidates/" + candidateId, {
+      method: "PATCH",
+      // body: JSON.stringify(candidateVotes),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-        if(!response.ok) {
-            setError(json.error)
-        }
-        if(response.ok){
-            setError(null)
-            setVotes(0)
-            console.log('candidate updated: ', json)
-        }
+    const json = await response.json;
 
-        // dispatch({ type: "DISABLE_BUTTON" });
+    if (!response.ok) {
+      setError(json.error);
     }
+    if (response.ok) {
+      setError(null);
+      // setVotes(0)
+      console.log("candidate updated: ", json);
+    }
+
+    // dispatch({ type: "DISABLE_BUTTON" });
+  };
 
   return (
     <div className="container">
-        <div className="items-center justify-center hover:bg-white hover:border hover:border-black hover:rounded-lg p-3">
-            <div className="">
-                <img src={props.profilepic} alt="#" className='rounded-full h-32 w-32 ml-12'/>
-            </div>
-            <p className="p-2 text-center text-slate-500 font-bold">{props.name}</p>
-            <p className="p-2 text-center text-slate-500 font-bold">{props.department}</p>
-            <div className="flex justify-between items-center">
-
-                <button onClick={(e)=>{                  
-                  submitVotes(e)                  
-                }} className="bg-purple-400 text-white hover:bg-white hover:text-purple-400 hover:border hover:border-purple-400 rounded-lg md:px-4 px-1 py-2">VOTE <p>{votes}</p> </button>
-
-                <Link to="/candidate-profile">
-                    <button className="bg-white text-purple-400 rounded-lg border border-purple-400 hover:text-white hover:bg-purple-400 py-2 md:px-1 px-1">VIEW DETAILS</button>
-                </Link>
-            </div>
+      <div className="items-center justify-center hover:bg-purple-300 hover:border hover:border-black hover:rounded-lg p-3">
+        <div className="">
+          <img
+            src={props.profilepic}
+            alt="#"
+            className="rounded-full h-32 w-32 ml-12"
+          />
         </div>
+        <p className="p-2 text-center text-slate-500 font-bold">{props.name}</p>
+        <p className="p-2 text-center text-slate-500 font-bold">
+          {props.department}
+        </p>
+        {props.userProfile ? (
+          <div className="flex justify-between items-center">
+            <button
+              onClick={(e) => {
+                submitVotes(e);
+              }}
+              className="bg-purple-400 text-white hover:bg-white hover:text-purple-400 hover:border hover:border-purple-400 rounded-lg md:px-4 px-1 py-2"
+              disabled={props.voted ? true : false}
+            >
+              VOTE <p>{props.candidateVotes}</p>{" "}
+            </button>
+
+            <Link to="/candidate-profile">
+              <button className="bg-white text-purple-400 rounded-lg border border-purple-400 hover:text-white hover:bg-purple-400 py-2 md:px-1 px-1">
+                VIEW DETAILS
+              </button>
+            </Link>
+          </div>
+        ) : (
+            <Link to="/candidate-profile" className="ml-12">
+              <button className="bg-white text-purple-400 rounded-lg border border-purple-400 hover:text-white hover:bg-purple-400 py-2 md:px-1 px-1">
+                VIEW DETAILS
+              </button>
+            </Link>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default VotingCard
-
-
-
-
-
-
-
+export default VotingCard;
 
 /*
 disabled={props.disabled}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useCandidatesContext } from '../hooks/useCandidatesContext'
 
 
-const CandidatesModal = ({ showCandidateModal, setShowCandidateModal }) => {
+const CandidatesModal = ({ showCandidateModal, setShowCandidateModal, candidatePoll }) => {
     const { candidates, dispatch } = useCandidatesContext()
 
     const [name, setName] = useState('')
@@ -13,11 +13,12 @@ const CandidatesModal = ({ showCandidateModal, setShowCandidateModal }) => {
     const [error, setError] = useState(null)
 
     const candidateVotes = 0;
+    const position = candidatePoll;
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const candidate = { name, department, age, campaignPromise, candidateVotes }
+        const candidate = { name, department, age, campaignPromise, candidateVotes, position }
 
         
         const response = await fetch('/api/candidates', {

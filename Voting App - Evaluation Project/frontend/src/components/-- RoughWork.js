@@ -95,6 +95,10 @@ const PollingPage = () => {
 
 export default PollingPage
 
+// "proxy": "https://voting-app-api.onrender.com",
+
+// <p>{votes}</p>
+
 
 
 /* POLLING MODAL
@@ -115,6 +119,58 @@ export default PollingPage
 
 
         </div>
+
+*/
+
+
+/* POLL MODAL - CANDIDATE MODAL SECTION
+
+<div className="flex items-center">
+              <button
+                onClick={openPollModal}
+                className="hover:bg-white border border-black mt-4 ml-8 p-5 items-center text-center justify-center rounded-lg"
+                id="second-section"
+              >
+                <BsPlusLg size={20} className="text-slate-500 font-semibold" />
+              </button>
+
+              <div className="pl-5">
+                <p className="text-slate-500 font-semibold">Add Candidates</p>
+              </div>
+            </div>
+            {pollModal ? (
+              <div className="grid grid-cols-3 gap-4 p-4 m-3 items-center hover:border hover:border-black">
+                {candidates &&
+                  candidates.map((candidate) => (
+                    <CandidateDetails
+                      key={candidate._id}
+                      candidate={candidate}
+                    />
+                  ))}
+
+                <div className="w-1/2 flex items-center">
+                  <button
+                    onClick={openCandidateModal}
+                    className="hover:bg-white border border-black mt-4 ml-8 p-5 items-center text-center justify-center rounded-lg"
+                    id="second-section"
+                  >
+                    <BsPlusLg
+                      size={20}
+                      className="text-slate-500 font-semibold"
+                    />
+                  </button>
+                  <CandidatesModal
+                    showCandidateModal={showCandidateModal}
+                    setShowModal={setShowCandidateModal}
+                  />
+                  <div className="pl-5">
+                    <p className="text-slate-500 font-semibold">
+                      Add a New Candidate
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : null}
 
 */
 
