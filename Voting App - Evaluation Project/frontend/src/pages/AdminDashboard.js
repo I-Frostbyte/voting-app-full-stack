@@ -10,6 +10,7 @@ import { usePollsContext } from "../hooks/usePollsContext";
 
 const AdminDashboard = (props) => {
   const [showPollModal, setShowPollModal] = useState(false);
+  const [showButton, setShowButton] = useState(true)
 
   const openModal = () => {
     setShowPollModal((prev) => !prev);
@@ -36,7 +37,7 @@ const AdminDashboard = (props) => {
             props.polls.map((poll, ind) => {
               return (
                 <div className="w-11/12 ml-8">
-                  <PollingCard Key={poll._id} title={poll.title} />
+                  <PollingCard Key={poll._id} title={poll.title} showButton={showButton}/>
                 </div>
               );
             })}

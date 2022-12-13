@@ -57,7 +57,7 @@ const VotingCard = (props) => {
         <p className="p-2 text-center text-slate-500 font-bold">
           {props.department}
         </p>
-        {props.userProfile ? (
+        {/* {props.userProfile ? ( */}
           <div className="flex justify-between items-center">
             <button
               onClick={(e) => {
@@ -75,13 +75,15 @@ const VotingCard = (props) => {
               </button>
             </Link>
           </div>
-        ) : (
+        {/*         
+         ) : (
             <Link to="/candidate-profile" className="ml-12">
               <button className="bg-white text-purple-400 rounded-lg border border-purple-400 hover:text-white hover:bg-purple-400 py-2 md:px-1 px-1">
                 VIEW DETAILS
               </button>
             </Link>
         )}
+         */}
       </div>
     </div>
   );

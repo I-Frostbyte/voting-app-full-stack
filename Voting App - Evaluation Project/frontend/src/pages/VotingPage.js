@@ -9,6 +9,12 @@ import { useCandidatesContext } from "../hooks/useCandidatesContext";
 import PollingCard from "../components/PollingCard";
 
 const VotingPage = (props) => {
+  const [showButton, setShowButton] = useState(false)
+  const [showPollCard, setShowPollCard] = useState(true)
+
+  const handlePollCard = () => {
+    setShowPollCard((prev) => !prev)
+  }
   // let isClicked = false;
   //     const handleClick = (disable, disabled) => {
   //         isClicked = disable
@@ -41,7 +47,9 @@ const VotingPage = (props) => {
             props.polls.map((poll, ind) => {
               return (
                 <div className="w-11/12 ml-8">
-                  <PollingCard key={ind} title={poll.title} />
+                  {showPollCard ? (
+                    <PollingCard key={ind} title={poll.title} showButton={showButton} controlPollCard={handlePollCard}/>
+                  ) : null }                  
                 </div>
               );
             })}
