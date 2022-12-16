@@ -41,7 +41,7 @@ function App() {
     gapi.load("client:auth2", initClient);
 
     const fetchPolls = async () => {
-      const response = await fetch("https://voteroo-voting-app-api.onrender.com/api/polls");
+      const response = await fetch("/api/polls");
       const json = await response.json();
 
       if (response.ok) {

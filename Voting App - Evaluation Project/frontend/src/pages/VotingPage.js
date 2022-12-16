@@ -50,7 +50,7 @@ const VotingPage = (props) => {
     <div className="container flex">
       <Sidebar />
       <div className="w-full" id="second-section">
-        <SecondNavbar profile={props.profile} />
+        <SecondNavbar userProfile={pollContext.userProfile} />
         <div className="justify-left text-left ml-8 pt-3">
           <h1 className="text-purple-700 text-4xl font-bold pb-2">
             Your Vote is Secure, Your Vote Counts

@@ -6,6 +6,12 @@ var fs = require('fs')
 var path = require('path')
 require('dotenv/config')
 
+const getGoogleUsers = async (req, res) => {
+    const googleUsers = await GoogleUser.find({}).sort({createdAt: -1})
+
+    res.status(200).json(googleUsers)
+}
+
 const createGoogleUser = async (req, res) => {
 
     const { userName, email, imageUrl, voted } = req.body
@@ -44,4 +50,4 @@ const updateGoogleUser = async (req, res) => {
     res.status(200).json(googleUser)
 }
 
-module.exports = { createGoogleUser, updateGoogleUser }
+module.exports = { createGoogleUser, updateGoogleUser, getGoogleUsers }

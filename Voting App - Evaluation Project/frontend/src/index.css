@@ -9,8 +9,9 @@
 }
 
 #hero-first {
-  background-image: linear-gradient(#d0cccb, #e1e1df, #f0efed, #f3f2f0) ;
+  background-image: linear-gradient(#dee3e7, #fdfdfd, #fdfdfd, #fdfdfd) ;
   /* e1e1df f0efed d0cccb*/
+  /* e1e1df, #f0efed, #f3f2f0, */
 }
 
 #second-about-bubble{

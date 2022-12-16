@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Hero4 from '../assets/Hero4.jpg'
-import Hero3 from '../assets/Hero3.jpg'
+import Hero3 from '../assets/Hero3.png'
 import BarChart1 from '../assets/BarChart1.png'
 import { FaLock, FaVoteYea } from 'react-icons/fa'
 import { MdTimeline } from 'react-icons/md'
