@@ -1,8 +1,8 @@
-// require('dotenv').config()
+require('dotenv').config()
 
-if(process.env.NODE_ENV !== 'production') {
-    require('dotenv').config({path: __dirname+'/.env'})
-}
+// if(process.env.NODE_ENV !== 'production') {
+//     require('dotenv').config({path: __dirname+'/.env'})
+// }
 
 const express = require('express')
 const mongoose = require('mongoose')
@@ -44,12 +44,7 @@ app.use('/api/googleUsers/', googleUserRoutes)
 
 
 // connect to db
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,     
-})
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         // listen for requests
         app.listen(process.env.PORT, () => {
@@ -60,12 +55,12 @@ mongoose.connect(process.env.MONGO_URI, {
         console.log(err);
     })
 
-if (process.emitWarning.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend', 'build')))
-    app.get('/*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'))
-    })
-}    
+// if (process.emitWarning.NODE_ENV === 'production') {
+//     app.use(express.static(path.join(__dirname, '../frontend', 'build')))
+//     app.get('/*', (req, res) => {
+//         res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'))
+//     })
+// }    
 
 app.use(bodyParser.urlencoded({ extended: false }))    
 app.use(bodyParser.json())
