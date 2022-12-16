@@ -38,7 +38,7 @@ const Signup = (props) => {
     const email = res.profileObj.email;
     const imageUrl = res.profileObj.imageUrl;
 
-    const newUser = { userName, email, imageUrl };
+    const newUser = { userName, email, imageUrl, };
 
     // ADDING THE CURRENT LOGGED IN USER TO THE DB
 
