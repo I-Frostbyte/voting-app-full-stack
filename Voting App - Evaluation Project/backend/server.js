@@ -7,7 +7,7 @@ if(process.env.NODE_ENV !== 'production') {
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const path = require('path')
+// const path = require('path')
 var multer = require('multer')
 
 // voting routes require
