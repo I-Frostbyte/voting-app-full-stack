@@ -1,5 +1,5 @@
 {  
-  "homepage": "https://voteroo-voting-app-api.onrender.com",  
+  "proxy": "https://voteroo-voting-app-api.onrender.com",  
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
