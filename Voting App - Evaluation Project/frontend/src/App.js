@@ -86,7 +86,7 @@ function App() {
   return (
     <ProfileContext.Provider value={profileControls}>
       <div className="App" id="hero-first">
-        <BrowserRouter>
+        <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<Hero />} />
             <Route path="/about" element={<About />} />

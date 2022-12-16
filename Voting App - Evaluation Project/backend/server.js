@@ -1,19 +1,27 @@
-require('dotenv').config()
+// require('dotenv').config()
+
+if(process.env.NODE_ENV !== 'production') {
+    require('dotenv').config({path: __dirname+'/.env'})
+}
 
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const path = require('path')
 var multer = require('multer')
+
 // voting routes require
 const candidateRoutes = require('./routes/candidates')
 const pollRoutes = require('./routes/polls')
 const pictureRoutes = require('./routes/pictures')
 const adminRoutes = require('./routes/admin')
 const googleUserRoutes = require('./routes/googleUser')
+
 // user routes require
 
 var fs = require('fs')
 var path = require('path')
+const cors = require('cors')
 // require('dotenv/config')
 
 // express app
@@ -36,7 +44,12 @@ app.use('/api/googleUsers/', googleUserRoutes)
 
 
 // connect to db
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,     
+})
     .then(() => {
         // listen for requests
         app.listen(process.env.PORT, () => {
@@ -47,6 +60,12 @@ mongoose.connect(process.env.MONGO_URI)
         console.log(err);
     })
 
+if (process.emitWarning.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend', 'build')))
+    app.get('/*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'))
+    })
+}    
 
 app.use(bodyParser.urlencoded({ extended: false }))    
 app.use(bodyParser.json())
