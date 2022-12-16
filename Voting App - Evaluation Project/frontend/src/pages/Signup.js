@@ -10,9 +10,9 @@ import { gapi } from "gapi-script";
 import ProfileContext from "../context/profileContext";
 
 const Signup = (props) => {
-  const signupContext = useContext(ProfileContext)
-  
-  const [err, setErr] = useState(null)
+  const signupContext = useContext(ProfileContext);
+
+  const [err, setErr] = useState(null);
 
   // useEffect(() => {
   //   const initClient = () => {
@@ -27,57 +27,58 @@ const Signup = (props) => {
 
   const clientId =
     "975614919993-ht8pilt54vaht18rpkr4bvdsjuoj18kg.apps.googleusercontent.com";
-  
+
   const onSuccess = (res) => {
-    signupContext.setUserProfile(res.profileObj)
-    localStorage.setItem('GoogleUser', JSON.stringify(res.profileObj))
-    const storeUser = localStorage.getItem('GoogleUser')
-    console.log(storeUser)
+    signupContext.setUserProfile(res.profileObj);
+    localStorage.setItem("GoogleUser", JSON.stringify(res.profileObj));
+    const storeUser = localStorage.getItem("GoogleUser");
+    console.log(storeUser);
 
     const userName = res.profileObj.name;
     const email = res.profileObj.email;
     const imageUrl = res.profileObj.imageUrl;
-    
-    const newUser = { userName, email, imageUrl}
+
+    const newUser = { userName, email, imageUrl };
 
     // ADDING THE CURRENT LOGGED IN USER TO THE DB
 
     const addUser = async () => {
-      const resp = await fetch('/api/googleUsers', {
-        method: 'POST',
+      const resp = await fetch("/api/googleUsers", {
+        method: "POST",
         body: JSON.stringify(newUser),
         headers: {
-          'Content-Type': 'application/json'
-        }
-      }) 
-      
-      const jn = await resp.json()
-    
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        },
+        mode: 'no-cors'
+      });
+
+      const jn = await resp.json();
+
       if (!resp.ok) {
-        console.log('User not checked.')
-        setErr(jn.error)
+        console.log("User not checked.");
+        setErr(jn.error);
       }
-    
+
       if (resp.ok) {
-        setErr(null)
-        console.log('Google User in Db: ', jn)
+        setErr(null);
+        console.log("Google User in Db: ", jn);
       }
 
-      signupContext.setLoggedUser(jn)
+      signupContext.setLoggedUser(jn);
+    };
 
-    }
-
-    addUser()
-  }
+    addUser();
+  };
 
   const onFailure = (err) => {
-    props.onFailure(err)
-  }    
+    props.onFailure(err);
+  };
 
   return (
     <div className="container pt-5">
-      <Navbar       
-      />
+      <Navbar />
       <div className="md:grid md:grid-cols-2 grid grid-cols-1">
         <div className="md:mx-2 mx-20 pt-2">
           <img src={Login1} alt="" className="md:ml-20 ml-10" />
@@ -93,7 +94,7 @@ const Signup = (props) => {
             </p>
           </div>
 
-          <div className="text-center py-3">            
+          <div className="text-center py-3">
             <div className="right-0">
               <div id="signInButton">
                 <GoogleLogin
@@ -107,14 +108,13 @@ const Signup = (props) => {
               </div>
             </div>
           </div>
-          
+
           <div className="text-center px-32 pt-5 pb-5">
             <p className="text-slate-500 font-semibold">
               By signing up using Google, you agree with our
             </p>
             <p className="text-purple-700 font-bold">Terms and Conditions</p>
-          </div>          
-          
+          </div>
         </div>
       </div>
     </div>
@@ -124,5 +124,3 @@ const Signup = (props) => {
 export default Signup;
 
 // id="admin-button"
-
-

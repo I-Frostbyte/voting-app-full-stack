@@ -18,6 +18,11 @@ const createGoogleUser = async (req, res) => {
 
     const exists = await GoogleUser.findOne({ email })
 
+    res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+    })
+
     if(exists) {
         return res.status(200).json(exists)
     } else {
