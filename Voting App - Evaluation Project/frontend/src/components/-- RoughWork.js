@@ -1,35 +1,30 @@
 // const [vote, setVote] = useState(0)
-    // const [click, setClick] = useState(false) 
-    
+// const [click, setClick] = useState(false)
 
-    // let voted = click
-       
-    
-    // const handleClick = event => {
-    //     // event.currentTarget.disabled = true
-    //     event.preventDefault()                   
-    //     setVote(1)
-    //     setClick(true)         
-    // }
+// let voted = click
 
-    // useEffect(() => {
-    //   const res = fetch(`http://localhost:4000/api/candidates`)
-    //     .then((res) => res.json())
-    //     .catch((err) => {
-    //         console.log(err)
-    //     })
-    //     console.log(JSON.stringify(res))
-    
-    //       }, [])
+// const handleClick = event => {
+//     // event.currentTarget.disabled = true
+//     event.preventDefault()
+//     setVote(1)
+//     setClick(true)
+// }
 
+// useEffect(() => {
+//   const res = fetch(`http://localhost:4000/api/candidates`)
+//     .then((res) => res.json())
+//     .catch((err) => {
+//         console.log(err)
+//     })
+//     console.log(JSON.stringify(res))
 
+//       }, [])
 
+// FROM BACKEND
 
-    // FROM BACKEND
+// getCandidates
 
-    // getCandidates
-
-    /*
+/*
     Candidate.find({}, (err, items) => {
         if(err) {
             console.log(err)
@@ -40,7 +35,7 @@
     })
     */
 
-    /*
+/*
     const user_id = req.user.id
 
     const candidates = await Candidate.find({ user_id }).sort({createdAt: -1})
@@ -48,12 +43,10 @@
     res.status(200).json(candidates)
     */
 
+//
 
-    // 
-
-
-    // POLLING PAGE FORMER MODAL
-    /*
+// POLLING PAGE FORMER MODAL
+/*
 
     import React, { useState } from 'react'
 import AdminSidebar from '../components/AdminSidebar'
@@ -121,7 +114,6 @@ export default PollingPage
         </div>
 
 */
-
 
 /* POLL MODAL - CANDIDATE MODAL SECTION
 
@@ -209,10 +201,22 @@ export default PollingPage
             />
           </div>
         </div>
+        
 
 */
 
+/*
 
+<div className="text-center pb-5 flex items-center justify-between mx-10">
+            <button className="text-white bg-purple-500 hover:bg-white hover:border hover:border-purple-500 hover:text-purple-500 rounded-3xl px-20 py-4 my-3 font-bold text-xs">
+              Sign up
+            </button>
+            {/* <br /> 
+            <Link to="/admin">
+              <button className="text-white bg-purple-500 hover:bg-white hover:border hover:border-purple-500 hover:text-purple-500 rounded-3xl px-10 py-4 my-3 font-bold text-xs">
+                Sign In as an Admin{" "}
+              </button>
+            </Link>
+          </div>
 
-
-    
+*/

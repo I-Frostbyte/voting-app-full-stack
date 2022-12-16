@@ -8,6 +8,8 @@ var multer = require('multer')
 const candidateRoutes = require('./routes/candidates')
 const pollRoutes = require('./routes/polls')
 const pictureRoutes = require('./routes/pictures')
+const adminRoutes = require('./routes/admin')
+const googleUserRoutes = require('./routes/googleUser')
 // user routes require
 
 var fs = require('fs')
@@ -29,6 +31,8 @@ app.use((req, res, next) => {
 app.use('/api/candidates', candidateRoutes)
 app.use('/api/polls', pollRoutes)
 app.use('/api/pictures', pictureRoutes)
+app.use('/api/admin', adminRoutes)
+app.use('/api/googleUsers/', googleUserRoutes)
 
 
 // connect to db

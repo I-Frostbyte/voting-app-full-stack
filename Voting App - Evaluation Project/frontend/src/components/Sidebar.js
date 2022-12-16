@@ -5,8 +5,8 @@ import { AiFillHome } from 'react-icons/ai'
 import { MdHowToVote } from 'react-icons/md'
 import { FaList } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
-
 const Sidebar = () => {
+
   return (
     <div className='container object-left w-2/12 border-r border-b border-gray-400 h-1/2'>
         <div className="md:mb-20 m-0 pt-5 md:visible invisible">

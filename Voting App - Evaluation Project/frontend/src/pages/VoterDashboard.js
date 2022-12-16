@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import SecondNavbar from '../components/SecondNavbar'
 import Sidebar from '../components/Sidebar'
 import OngoingElection from '../assets/OngoingElection.jpg'
+import ProfileContext from '../context/profileContext'
 
-const VoterDashboard = () => {
+const VoterDashboard = (props) => {
+  const voterdashboardContext = useContext(ProfileContext)
+
+  const userProfile = voterdashboardContext.userProfile
+
   return (
     <div className='container flex'>
         <Sidebar />
         <div id="second-section" className='w-full'>
-          <SecondNavbar />
+          <SecondNavbar userProfile={userProfile}/>
           <div className="justify-left text-left ml-8 pt-3">
-            <h1 className='text-purple-700 text-3xl font-bold'>Hello, Jane</h1>
+            <h1 className='text-purple-700 text-3xl font-bold'>Hello, {voterdashboardContext.userProfile.name}</h1>
             <p className="text-slate-500 font-semibold pb-3">Welcome to the Voteroo voting platform</p>
           </div>
           <div className="md:grid md:grid-cols-2 grid grid-cols-1 gap-4 ml-8 pb-20">

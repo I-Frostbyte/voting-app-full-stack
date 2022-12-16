@@ -11,23 +11,9 @@ import { gapi } from 'gapi-script'
 // import { config } from 'dotenv'
 
 
-const Hero = () => {
-    useEffect(() => {
-        const initClient = () => {
-          gapi.client.init({
-            clientId: clientId,
-            scope: "",
-          });
-        };
-    
-        gapi.load("client:auth2", initClient);
-      });
-    
-      const clientId =
-      "975614919993-ht8pilt54vaht18rpkr4bvdsjuoj18kg.apps.googleusercontent.com";
+const Hero = () => { 
 
-  return (
-    
+  return (    
     <div className='hero-container'>
         <Navbar />
         <div className="pt-2 md:grid md:grid-cols-2 sm:grid sm:grid-cols-1 sm:justify-center items-center mx-10 justify-between">

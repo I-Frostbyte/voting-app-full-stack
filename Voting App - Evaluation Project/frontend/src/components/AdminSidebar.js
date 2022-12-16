@@ -5,8 +5,15 @@ import { AiFillHome } from 'react-icons/ai'
 import { MdHowToVote } from 'react-icons/md'
 import { FaList } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
+import { useAdminLogout } from "../hooks/useAdminLogout";
 
 const AdminSidebar = () => {
+  const { adminLogout } = useAdminLogout();  
+
+  const handleClick = () => {
+    adminLogout()
+  }
+
   return (
     <div className='container object-left w-2/12 border-r border-b border-gray-400 h-1/2'>
         <div className="md:mb-20 m-0 pt-5 md:visible invisible">
@@ -21,8 +28,12 @@ const AdminSidebar = () => {
             <Link to="/guidelines" className='md:py-3 my-3 hover:bg-gray-300 items-center flex'><FaList size={20} className='md:ml-6 mr-3 md:mr-6' /><p className='md:visible invisible '>Guidelines</p></Link>
         </div>
         <div className="py-3 flex text-center">
-            <FiLogOut size={40} className='px-5'/>
-            <p className='md:visible invisible '>Logout</p>
+            <Link to='/register'>
+                <button onClick={handleClick}>
+                <FiLogOut size={40} className='px-5'/>
+                <p className='md:visible invisible '>Logout</p>
+                </button>
+            </Link>
         </div>
     </div>
   )

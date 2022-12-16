@@ -1,37 +1,82 @@
-import React from "react";
-// import { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import { useState, useEffect } from "react";
 import Login1 from "../assets/Login1.jpg";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 // import LoginButton from "../components/Login";
 // import LogoutButton from '../components/Logout'
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
+import ProfileContext from "../context/profileContext";
 
 const Signup = (props) => {
+  const signupContext = useContext(ProfileContext)
+  
+  const [err, setErr] = useState(null)
+
+  // useEffect(() => {
+  //   const initClient = () => {
+  //     gapi.client.init({
+  //       clientId: clientId,
+  //       scope: "",
+  //     });
+  //   };
+
+  //   gapi.load("client:auth2", initClient);
+  // }, []);
 
   const clientId =
     "975614919993-ht8pilt54vaht18rpkr4bvdsjuoj18kg.apps.googleusercontent.com";
   
-  const loginSuccess = () => {
-    props.onLoginSuccess()
+  const onSuccess = (res) => {
+    signupContext.setUserProfile(res.profileObj)
+    localStorage.setItem('GoogleUser', JSON.stringify(res.profileObj))
+    const storeUser = localStorage.getItem('GoogleUser')
+    console.log(storeUser)
+
+    const userName = res.profileObj.name;
+    const email = res.profileObj.email;
+    const imageUrl = res.profileObj.imageUrl;
+    
+    const newUser = { userName, email, imageUrl}
+
+    // ADDING THE CURRENT LOGGED IN USER TO THE DB
+
+    const addUser = async () => {
+      const resp = await fetch('/api/googleUsers', {
+        method: 'POST',
+        body: JSON.stringify(newUser),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }) 
+      
+      const jn = await resp.json()
+    
+      if (!resp.ok) {
+        console.log('User not checked.')
+        setErr(jn.error)
+      }
+    
+      if (resp.ok) {
+        setErr(null)
+        console.log('Google User in Db: ', jn)
+      }
+
+      signupContext.setLoggedUser(jn)
+
+    }
+
+    addUser()
   }
 
-  const loginFailure = () => {
-    props.onLoginFailure()
-  }
-
-  const startLogout = () => {
-    props.onLogout()
-  }
-
-  const userProfile = props.profile
+  const onFailure = (err) => {
+    props.onFailure(err)
+  }    
 
   return (
     <div className="container pt-5">
-      <Navbar 
-      profile={userProfile}
-      onLogout={startLogout}
+      <Navbar       
       />
       <div className="md:grid md:grid-cols-2 grid grid-cols-1">
         <div className="md:mx-2 mx-20 pt-2">
@@ -47,53 +92,29 @@ const Signup = (props) => {
               preferred candidate.
             </p>
           </div>
-          <div className="py-3 text-center">
-            <input
-              type="number"
-              className="rounded-3xl pr-72 pl-5 py-3"
-              placeholder="Student Id No:"
-            />
-          </div>
-          <div className="py-3 text-center">
-            <input
-              type="password"
-              className="rounded-3xl pr-72 pl-5 py-3"
-              placeholder="Password"
-            />
-          </div>
-          <div className="text-center px-32 pt-5 pb-5">
-            <p className="text-slate-500 font-semibold">
-              By Clicking the sign up button, you agree with our
-            </p>
-            <p className="text-purple-700 font-bold">Terms and Conditions</p>
-          </div>
 
-          <div className="text-center pb-5 flex items-center justify-between mx-10">
-            <button className="text-white bg-purple-500 hover:bg-white hover:border hover:border-purple-500 hover:text-purple-500 rounded-3xl px-20 py-4 my-3 font-bold text-xs">
-              Sign up
-            </button>
-            {/* <br /> */}
-            <Link to="/admin">
-              <button className="text-white bg-purple-500 hover:bg-white hover:border hover:border-purple-500 hover:text-purple-500 rounded-3xl px-10 py-4 my-3 font-bold text-xs">
-                Sign In as an Admin{" "}
-              </button>
-            </Link>
-          </div>
-          <div className="text-center pb-10">
-            <h1 className="pb-5 text-xl font-bold hover:text-purple-500">OR</h1>
+          <div className="text-center py-3">            
             <div className="right-0">
               <div id="signInButton">
                 <GoogleLogin
                   clientId={clientId}
                   buttonText="SIGN IN WITH GOOGLE"
-                  onSuccess={loginSuccess}
-                  onFailure={loginFailure}
+                  onSuccess={onSuccess}
+                  onFailure={onFailure}
                   cookiePolicy={"single_host_origin"}
                   isSignedIn={true}
                 />
               </div>
             </div>
           </div>
+          
+          <div className="text-center px-32 pt-5 pb-5">
+            <p className="text-slate-500 font-semibold">
+              By signing up using Google, you agree with our
+            </p>
+            <p className="text-purple-700 font-bold">Terms and Conditions</p>
+          </div>          
+          
         </div>
       </div>
     </div>
@@ -103,3 +124,5 @@ const Signup = (props) => {
 export default Signup;
 
 // id="admin-button"
+
+

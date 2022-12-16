@@ -1,29 +1,31 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useVotingContext } from "../hooks/useVotingContext";
+import ProfileContext from "../context/profileContext";
 
 const VotingCard = (props) => {
   // const [votes, setVotes] = useState(0)
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null);  
+  
+  const voteContext = useContext(ProfileContext)
 
-  // const { disableButton, dispatch } = useVotingContext
+  console.log("VoteContext", voteContext)  
 
-  const candidateId = props.id;
+  const candidateId = props.id;  
+
+  // useEffect(() => {
+  // }, [])
+
+  // CLICK BUTTON ACTION
 
   const submitVotes = async (e) => {
     e.preventDefault();
-
-    // setVotes(1)
-
+    
     props.onVoted();
 
-    // const candidateVotes = {votes}
-
     const response = await fetch("/api/candidates/" + candidateId, {
-      method: "PATCH",
-      // body: JSON.stringify(candidateVotes),
+      method: "PATCH",      
       headers: {
         "Content-Type": "application/json",
       },
@@ -39,8 +41,25 @@ const VotingCard = (props) => {
       // setVotes(0)
       console.log("candidate updated: ", json);
     }
+    
+    const rep = await fetch('/api/googleUsers/' + props.userId, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
-    // dispatch({ type: "DISABLE_BUTTON" });
+    const repjson = await rep.json
+
+    if(!rep.ok){
+      setError(repjson.error)
+    }
+    if(rep.ok){
+      setError(null)
+      console.log('user db updated', repjson)         
+    }
+
+    
   };
 
   return (
@@ -57,13 +76,13 @@ const VotingCard = (props) => {
         <p className="p-2 text-center text-slate-500 font-bold">
           {props.department}
         </p>
-        {/* {props.userProfile ? ( */}
+        {voteContext.userProfile ? (
           <div className="flex justify-between items-center">
             <button
               onClick={(e) => {
                 submitVotes(e);
               }}
-              className="bg-purple-400 text-white hover:bg-white hover:text-purple-400 hover:border hover:border-purple-400 rounded-lg md:px-4 px-1 py-2"
+              className="bg-purple-400 text-white hover:bg-white hover:text-purple-400 hover:border hover:border-purple-400 rounded-lg md:px-4 px-1 py-2 disabled:opacity-50"
               disabled={props.voted ? true : false}
             >
               VOTE <p>{props.candidateVotes}</p>{" "}
@@ -74,8 +93,7 @@ const VotingCard = (props) => {
                 VIEW DETAILS
               </button>
             </Link>
-          </div>
-        {/*         
+          </div>                 
          ) : (
             <Link to="/candidate-profile" className="ml-12">
               <button className="bg-white text-purple-400 rounded-lg border border-purple-400 hover:text-white hover:bg-purple-400 py-2 md:px-1 px-1">
@@ -83,7 +101,7 @@ const VotingCard = (props) => {
               </button>
             </Link>
         )}
-         */}
+         
       </div>
     </div>
   );

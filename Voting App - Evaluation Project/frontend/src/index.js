@@ -4,15 +4,18 @@ import "./index.css";
 import App from "./App";
 import { CandidatesContextProvider } from "./context/CandidateContext";
 import { PollsContextProvider } from "./context/PollContext";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <PollsContextProvider>
-      <CandidatesContextProvider>
-        <App />
-      </CandidatesContextProvider>
-    </PollsContextProvider>
+    <AuthContextProvider>
+      <PollsContextProvider>
+        <CandidatesContextProvider>
+          <App />
+        </CandidatesContextProvider>
+      </PollsContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import CandidatesModal from "./CandidatesModal";
 import { useCandidatesContext } from "../hooks/useCandidatesContext";
@@ -7,10 +7,22 @@ import VotingCard from "./VotingCard";
 import PollingCardButtons from "./PollingCardButtons";
 
 const PollingCard = (props) => {
+    
+
   const [visibleButton, setVisibleButton] = useState(true);
   const [showCandidateModal, setShowCandidateModal] = useState(false);
-  const [voted, setVoted] = useState(false);
+  const [voted, setVoted] = useState(props.userVoteStatus);  
   const [showButton, setShowButton] = useState(props.showButton);
+
+  // const userName = pollContext.userProfile.name
+  // const email = pollContext.userProfile.email
+  // const imageUrl = pollContext.userProfile.imageUrl
+  // // const voted = false
+
+  // const googleUser = { userName, email, imageUrl }
+
+  // console.log("GoogleUser", googleUser)  
+
 
   // const handleShowButton = () => {
   //   setShowButton(props.showButton);
@@ -18,7 +30,7 @@ const PollingCard = (props) => {
 
   const candidatePoll = props.title;
   const { candidates, dispatch } = useCandidatesContext();
-  const userProfile = props.profile;
+  // const userProfile = props.userProfile;
 
   const handleVisibleButton = () => {
     props.controlPollCard()
@@ -33,7 +45,12 @@ const PollingCard = (props) => {
     setVoted(true);
   };
 
+  const handleGuser = (jn) => {
+    props.onGuser(jn)
+  } 
+
   useEffect(() => {
+    // FETCHING CANDIDATES 
     const fetchCandidates = async () => {
       const response = await fetch("/api/candidates");
       const json = await response.json();
@@ -44,6 +61,8 @@ const PollingCard = (props) => {
     };
 
     fetchCandidates();
+
+    // setLoggedUser(jn)    
   }, []);
 
   return (
@@ -68,7 +87,8 @@ const PollingCard = (props) => {
                     id={candidate._id}
                     voted={voted}
                     onVoted={handleVoted}
-                    userProfile={userProfile}
+                    onGuser={handleGuser}
+                    userId={props.userId}                    
                   />
                 );
               })}

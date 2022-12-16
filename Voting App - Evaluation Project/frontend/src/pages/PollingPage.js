@@ -9,7 +9,7 @@ import { useCandidatesContext } from "../hooks/useCandidatesContext";
 import PollDetails from "../components/PollDetails";
 // import { FaHourglassEnd } from "react-icons/fa";
 
-const PollingPage = () => {
+const PollingPage = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [showCandidateModal, setShowCandidateModal] = useState(false);
   const [pollModal, setPollModal] = useState(false)
@@ -28,6 +28,8 @@ const PollingPage = () => {
   }
 
   const { candidates, dispatch } = useCandidatesContext();
+
+  const profile = props.profile
 
   useEffect(() => {
     const fetchCandidates = async () => {
